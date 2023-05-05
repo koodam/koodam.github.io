@@ -3,6 +3,8 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
+import BaseLayout from '../layouts/BaseLayout.astro';
+
 const pageTitle = "About me";
 
 const identity = {
@@ -23,7 +25,33 @@ const fontWeight = "bold";
 const textCase = "uppercase";
 ---
 
-<html lang="en">
+<BaseLayout pageTitle={pageTitle}>
+
+	<p>Here are some of the fun facts about me</p>
+
+	<ul>
+		<li>My name is {identity.firstName}</li>
+		<li> I live in {identity.country}</li>
+		{
+			identity.hobbies.length >= 2 && 
+			<li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+		}
+	</ul>
+
+	<p>Skills</p>
+	<ul>
+		{skills.map( skill => (<li class="skill">{skill}</li>) )}
+	</ul>
+
+	{happy && <p>I am happy to be learning astro.</p>}
+
+	{finished && <p>I finished this tutorial.</p>}
+
+	{goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+
+</BaseLayout>
+
+<!-- <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -43,7 +71,6 @@ const textCase = "uppercase";
 		</style>
 	</head>
 	<body>
-
 		<Header />
 
 		<h1>About</h1>
@@ -77,4 +104,4 @@ const textCase = "uppercase";
 			import "../scripts/menu.js"
 		</script>
 	</body>
-</html>
+</html> -->
